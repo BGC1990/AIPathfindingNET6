@@ -199,19 +199,20 @@ namespace AIAssignment
 
     public class Dijkstra
     {
-        public List<Object> Results(Graph<string> graph, Node<string> node)
+        public List<Object> Results(Graph<string> graph, GraphNode<string> node)
         {
             Dictionary<GraphNode<string>, double> totalCosts = new Dictionary<GraphNode<string>, double>();
             Dictionary<GraphNode<string>, GraphNode<string>> previousNodes = new Dictionary<GraphNode<string>, GraphNode<string>>();
-            PriorityQueue<Node<string>, int> minPQ = new PriorityQueue<Node<string>, int>();
+            PriorityQueue<GraphNode<string>, int> minPQ = new PriorityQueue<GraphNode<string>, int>();
             HashSet<Node<string>> visited = new HashSet<Node<string>>();
 
-            totalCosts.Add("Start" as GraphNode<string>, 0); //not sure if strings are what is needed here
-            minPQ.Add("Start");
+            totalCosts.Add(new GraphNode<string>("Start"), 0); //not sure if strings are what is needed here
+            minPQ.Enqueue(new GraphNode<string>("Start"), 0);
+              
 
-            foreach (Node node in graph.Nodes)
+            foreach (GraphNode<string> x in graph.Nodes)
             {
-                if (node != "Start")
+                if (x != "Start")
                 {
                     totalCosts.Add(node, double.PositiveInfinity)    //add and put might not be the same thing
                 }
