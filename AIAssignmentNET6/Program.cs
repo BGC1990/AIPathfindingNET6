@@ -201,7 +201,7 @@ namespace AIAssignment
     {
         public List<Object> Results(Graph<string> graph, Node<string> node)
         {
-            Dictionary<GraphNode<string>, double> totalCosts = new Dictionary<GraphNode<string>, double>();
+            Dictionary<string, double> totalCosts = new Dictionary<string, double>(); //try doing it without using the GraphNode type
             Dictionary<GraphNode<string>, GraphNode<string>> previousNodes = new Dictionary<GraphNode<string>, GraphNode<string>>();
             PriorityQueue<Node<string>, int> minPQ = new PriorityQueue<Node<string>, int>();
             HashSet<Node<string>> visited = new HashSet<Node<string>>();
