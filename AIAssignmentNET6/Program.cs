@@ -212,9 +212,9 @@ namespace AIAssignment
 
             foreach (GraphNode<string> x in graph.Nodes)
             {
-                if (x != "Start")
+                if (!x.Equals("Start"))
                 {
-                    totalCosts.Add(node, double.PositiveInfinity)    //add and put might not be the same thing
+                    totalCosts.Add(node, double.PositiveInfinity);   //add and put might not be the same thing
                 }
             }
 
