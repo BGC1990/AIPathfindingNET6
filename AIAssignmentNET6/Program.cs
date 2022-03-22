@@ -182,13 +182,13 @@ namespace AIAssignment
         }
     }
 
-    public class GenericDictionary : Dictionary<dynamic, double>
+    public class GenericDictionary
     {
-        private Dictionary<object, double> dict = new Dictionary<object, double>();
+        private Dictionary<object, double> _dict = new Dictionary<object, double>();
 
         public void Add<T>(T key, double value) where T : class
         {
-            dict.Add(key, value);
+            _dict.Add(key, value);
         }
 
        // public T GetValue<T>(string key) where T : class
@@ -201,12 +201,12 @@ namespace AIAssignment
     {
         public List<Object> Results(Graph<string> graph, Node<string> node)
         {
-            Dictionary<string, double> totalCosts = new Dictionary<string, double>(); //try doing it without using the GraphNode type
+            Dictionary<GraphNode<string>, double> totalCosts = new Dictionary<GraphNode<string>, double>();
             Dictionary<GraphNode<string>, GraphNode<string>> previousNodes = new Dictionary<GraphNode<string>, GraphNode<string>>();
             PriorityQueue<Node<string>, int> minPQ = new PriorityQueue<Node<string>, int>();
             HashSet<Node<string>> visited = new HashSet<Node<string>>();
 
-            totalCosts.Add("Start", 0); //not sure if strings are what is needed here
+            totalCosts.Add("Start" as GraphNode<string>, 0); //not sure if strings are what is needed here
             minPQ.Add("Start");
 
             foreach (Node node in graph.Nodes)
