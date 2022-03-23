@@ -197,6 +197,8 @@ namespace AIAssignment
       //  }
     }
 
+    
+
     public class Dijkstra
     {
         public List<Object> Results(Graph<string> graph, GraphNode<string> node)
@@ -227,13 +229,13 @@ namespace AIAssignment
                     if (!visited.Contains(connectedNode))
                     {
                         double altPath = totalCosts.GetValueOrDefault(newSmallest) + totalCosts.GetValueOrDefault(newSmallest) + totalCosts.GetValueOrDefault(connectedNode); //this might not be right
-
+                        int altPathInt = Convert.ToInt32(altPath);
                         if (altPath < totalCosts.GetValueOrDefault(connectedNode))
                         {
                             totalCosts.Add(connectedNode, altPath);
                             previousNodes.Add(connectedNode, newSmallest);
 
-                            minPQ.d
+                            minPQ.Enqueue(connectedNode, altPathInt);
                         }
                     }
                 }
