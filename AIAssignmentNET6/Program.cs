@@ -245,6 +245,8 @@ namespace AIAssignment
 
 
             List<Object> results = new List<Object>();
+            results.Add(totalCosts);
+            results.Add(previousNodes);
             return results;
         }
 
