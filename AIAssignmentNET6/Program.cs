@@ -218,17 +218,17 @@ namespace AIAssignment
                 }
             }
 
-            while (!minPQ.Is())
+            while (minPQ.Count >= 1)
             {
-                Node newSmallest = minPQ.DelMin();
+                GraphNode<string> newSmallest = minPQ.Dequeue();
 
-                foreach (Node connectedNode in newSmallest.ConnectedNodes)
+                foreach (GraphNode<string> connectedNode in newSmallest.ConnectedNodes)
                 {
                     if (!visited.Contains(connectedNode))
                     {
-                        int altPath = totalCosts.TryGetValue(newSmallest) + distance(newSmallest, connectedNode);
+                        double altPath = totalCosts.GetValueOrDefault(newSmallest) + totalCosts.GetValueOrDefault(newSmallest) + totalCosts.GetValueOrDefault(connectedNode); //this might not be right
 
-                        if (altPath < totalCosts.TryGetValue(connectedNode))
+                        if (altPath < totalCosts.GetValueOrDefault(connectedNode))
                         {
                             totalCosts.Add(connectedNode, altPath);
                             previousNodes.Add(connectedNode, newSmallest);
