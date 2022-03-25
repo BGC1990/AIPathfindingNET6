@@ -241,9 +241,6 @@ namespace AIAssignment
                 }
             }
 
-
-
-
             List<Object> results = new List<Object>();
             results.Add(totalCosts);
             results.Add(previousNodes);
@@ -252,33 +249,19 @@ namespace AIAssignment
 
         public static void Main(string[] args)
         {
-            // Display the number of command line arguments.
-            Console.WriteLine(args.Length);
+            Graph<string> graph = new Graph<string>();
+            graph.AddNode(new GraphNode<string>("Start"));
+            graph.AddNode("A");
+            graph.AddNode("B");
+            graph.AddNode("C");
+            graph.AddNode("D");
+            graph.AddNode("E");
+            graph.AddNode("F");
+            graph.AddNode("G");
+            graph.AddNode("H");
+            graph.AddNode("End");
+            graph.AddUndirectedEdge("Start", "A", 3);
+            graph.AddUndirectedEdge("A", "D", 12);
         }
     }
 }
-
-
-
-/*public List Dijkstra(Graph graph, Node start)
-{
-    Dictionary<GraphNode, double> totalCosts = new Dictionary<Node, double>();
-    Dictionary<Node, Node> previousNodes = new Dictionary<Node, Node>();
-    MinPQ<Node> minPQ = new MinPQ<Node>();
-    HashSet<Node> visited = new HashSet<Node>();
-    totalCosts.Add(start, 0);
-    minPQ.Add(start);
-    foreach (Node node in graph.Nodes)
-    {
-        if (node != start)
-        {
-            totalCosts.Add(node, double.PositiveInfinity)
-            }
-    }
-    while (!minPQ.IsEmpty())
-    {
-        Node newSmallest = minPQ.deleteMin();
-    }
-}
-}
-*/
