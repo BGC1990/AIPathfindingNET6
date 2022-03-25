@@ -93,7 +93,7 @@ namespace AIAssignment
 
     public class Graph<T> : IEnumerable<T>
     {
-        private NodeList<T> nodeSet;
+        public NodeList<T> nodeSet;
 
         public Graph() : this(null) { }
         public Graph(NodeList<T> nodeSet)
