@@ -250,7 +250,7 @@ namespace AIAssignment
         public static void Main(string[] args)
         {
             Graph<string> graph = new Graph<string>();
-            graph.AddNode(new GraphNode<string>("Start"));
+            graph.AddNode("Start");
             graph.AddNode("A");
             graph.AddNode("B");
             graph.AddNode("C");
@@ -262,6 +262,16 @@ namespace AIAssignment
             graph.AddNode("End");
             graph.AddUndirectedEdge("Start", "A", 3);
             graph.AddUndirectedEdge("A", "D", 12);
+            graph.AddUndirectedEdge("A", "C", 15);
+            graph.AddUndirectedEdge("A", "B", 11);
+            graph.AddUndirectedEdge("B", "C", 2);
+            graph.AddUndirectedEdge("D", "C", 12);
+            graph.AddUndirectedEdge("C", "G", 16);
+            graph.AddUndirectedEdge("C", "H", 15);
+            graph.AddUndirectedEdge("G", "End", 18);
+            graph.AddUndirectedEdge("H", "End", 10);
+            Dijkstra x = new Dijkstra();
+            x.Results(graph, "Start");
         }
     }
 }
