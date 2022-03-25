@@ -260,7 +260,7 @@ namespace AIAssignment
             graph.AddNode("G");
             graph.AddNode("H");
             graph.AddNode("End");
-            graph.AddUndirectedEdge("Start", "A", 3);
+            graph.AddUndirectedEdge(graph.FirstOrDefault("Start"), "A", 3);
             graph.AddUndirectedEdge("A", "D", 12);
             graph.AddUndirectedEdge("A", "C", 15);
             graph.AddUndirectedEdge("A", "B", 11);
