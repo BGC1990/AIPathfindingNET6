@@ -208,7 +208,7 @@ namespace AIAssignment
             PriorityQueue<GraphNode<string>, int> minPQ = new PriorityQueue<GraphNode<string>, int>();
             HashSet<Node<string>> visited = new HashSet<Node<string>>();
 
-            //totalCosts.Add(new GraphNode<string>("Start"), 0); //not sure if strings are what is needed here
+            totalCosts.Add(new GraphNode<string>("Start"), 0); //not sure if strings are what is needed here
             minPQ.Enqueue(new GraphNode<string>("Start"), 0);
               
 
@@ -222,9 +222,9 @@ namespace AIAssignment
 
             while (minPQ.Count >= 1)
             {
-                GraphNode<string> newSmallest = minPQ.Dequeue();
+                GraphNode<string> newSmallest = minPQ.Dequeue(); 
 
-                foreach (GraphNode<string> connectedNode in newSmallest.ConnectedNodes)
+                foreach (GraphNode<string> connectedNode in newSmallest.ConnectedNodes) //thinks Start is the smallest priority node
                 {
                     if (!visited.Contains(connectedNode))
                     {
@@ -291,7 +291,7 @@ namespace AIAssignment
             graph.AddUndirectedEdge(F, End, 6);
 
             Dijkstra x = new Dijkstra();
-            Console.WriteLine(x.Results(graph, Start).ToString());
+            Console.WriteLine(x.Results(graph, Start));
         }
     }
 }
