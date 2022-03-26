@@ -214,7 +214,7 @@ namespace AIAssignment
 
             foreach (GraphNode<string> x in graph.Nodes)
             {
-                if (!x.Equals("Start"))
+                if (x.Value != "Start")
                 {
                     totalCosts.Add(node, double.PositiveInfinity);   //add and put might not be the same thing
                 }
@@ -250,28 +250,48 @@ namespace AIAssignment
         public static void Main(string[] args)
         {
             Graph<string> graph = new Graph<string>();
-            graph.AddNode("Start");
-            graph.AddNode("A");
-            graph.AddNode("B");
-            graph.AddNode("C");
-            graph.AddNode("D");
-            graph.AddNode("E");
-            graph.AddNode("F");
-            graph.AddNode("G");
-            graph.AddNode("H");
-            graph.AddNode("End");
-            graph.AddUndirectedEdge(graph.FirstOrDefault("Start"), "A", 3);
-            graph.AddUndirectedEdge("A", "D", 12);
-            graph.AddUndirectedEdge("A", "C", 15);
-            graph.AddUndirectedEdge("A", "B", 11);
-            graph.AddUndirectedEdge("B", "C", 2);
-            graph.AddUndirectedEdge("D", "C", 12);
-            graph.AddUndirectedEdge("C", "G", 16);
-            graph.AddUndirectedEdge("C", "H", 15);
-            graph.AddUndirectedEdge("G", "End", 18);
-            graph.AddUndirectedEdge("H", "End", 10);
+
+            var Start = new GraphNode<string>("Start");
+            var A = new GraphNode<string>("A");
+            var B = new GraphNode<string>("B");
+            var C = new GraphNode<string>("C");
+            var D = new GraphNode<string>("D");
+            var E = new GraphNode<string>("E");
+            var F = new GraphNode<string>("F");
+            var G = new GraphNode<string>("G");
+            var H = new GraphNode<string>("H");
+            var End = new GraphNode<string>("End");
+
+            graph.AddNode(Start);
+            graph.AddNode(A);
+            graph.AddNode(B);
+            graph.AddNode(C);
+            graph.AddNode(D);
+            graph.AddNode(E);
+            graph.AddNode(F);
+            graph.AddNode(G);
+            graph.AddNode(H);
+            graph.AddNode(End);
+            
+            graph.AddUndirectedEdge(Start, A, 3);
+            graph.AddUndirectedEdge(A, D, 12);
+            graph.AddUndirectedEdge(A, C, 15);
+            graph.AddUndirectedEdge(A, B, 11);
+            graph.AddUndirectedEdge(B, C, 2);
+            graph.AddUndirectedEdge(D, C, 12);
+            graph.AddUndirectedEdge(C, G, 16);
+            graph.AddUndirectedEdge(C, H, 15);
+            graph.AddUndirectedEdge(D, E, 9);
+            graph.AddUndirectedEdge(D, F, 14);
+            graph.AddUndirectedEdge(H, E, 6);
+            graph.AddUndirectedEdge(E, F, 12);
+            graph.AddUndirectedEdge(G, H, 6);
+            graph.AddUndirectedEdge(G, End, 18);
+            graph.AddUndirectedEdge(H, End, 10);
+            graph.AddUndirectedEdge(F, End, 6);
+
             Dijkstra x = new Dijkstra();
-            x.Results(graph, "Start");
+            Console.WriteLine(x.Results(graph, Start).ToString());
         }
     }
 }
