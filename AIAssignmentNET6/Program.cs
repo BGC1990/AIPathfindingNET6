@@ -224,7 +224,7 @@ namespace AIAssignment
             {
                 GraphNode<string> newSmallest = minPQ.Dequeue(); 
 
-                foreach (GraphNode<string> connectedNode in newSmallest.ConnectedNodes) //thinks Start is the smallest priority node
+                foreach (GraphNode<string> connectedNode in newSmallest.ConnectedNodes) //thinks Start has no connected nodes??????????
                 {
                     if (!visited.Contains(connectedNode))
                     {
