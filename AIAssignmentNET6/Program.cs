@@ -182,20 +182,20 @@ namespace AIAssignment
         }
     }
 
-    public class GenericDictionary
+    /*public class GenericDictionary
     {
-        private Dictionary<object, double> _dict = new Dictionary<object, double>();
+        private Dictionary<string, double> _dict = new Dictionary<string, double>();
 
         public void Add<T>(T key, double value) where T : class
         {
             _dict.Add(key, value);
         }
 
-       // public T GetValue<T>(string key) where T : class
-       // {
-       //     return dict[key] as T;
-      //  }
-    }
+        public T GetValue<T>(string key) where T : class
+        {
+            return _dict[key] as T;
+        }
+    }*/
 
     
 
@@ -208,7 +208,7 @@ namespace AIAssignment
             PriorityQueue<GraphNode<string>, int> minPQ = new PriorityQueue<GraphNode<string>, int>();
             HashSet<Node<string>> visited = new HashSet<Node<string>>();
 
-            totalCosts.Add(new GraphNode<string>("Start"), 0); //not sure if strings are what is needed here
+            //totalCosts.Add(new GraphNode<string>("Start"), 0); //not sure if strings are what is needed here
             minPQ.Enqueue(new GraphNode<string>("Start"), 0);
               
 
@@ -216,7 +216,7 @@ namespace AIAssignment
             {
                 if (x.Value != "Start")
                 {
-                    totalCosts.Add(node, double.PositiveInfinity);   //add and put might not be the same thing
+                    totalCosts.Add(x, double.PositiveInfinity);   //add and put might not be the same thing
                 }
             }
 
