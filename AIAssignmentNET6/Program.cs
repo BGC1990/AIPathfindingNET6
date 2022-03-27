@@ -33,7 +33,7 @@ namespace AIAssignment
 
     }
 
-    public class NodeList<T> : Collection<Node<T>>
+    public class NodeList<T> : Collection<GraphNode<T>>
     {
         public NodeList() : base() { } //not sure if have to invoke the base class to construct
 
@@ -41,13 +41,13 @@ namespace AIAssignment
         {
             for (int i = 0; i < initSize; i++)
             {
-                base.Items.Add(default(Node<T>));
+                base.Items.Add(new GraphNode<T>());
             }
         }
 
-        public Node<T> Find(T contents)
+        public GraphNode<T> Find(T contents)
         {
-            foreach (Node<T> node in Items)
+            foreach (GraphNode<T> node in Items)
             {
                 if (node.Value.Equals(contents))
                 {
@@ -206,10 +206,10 @@ namespace AIAssignment
             Dictionary<GraphNode<string>, double> totalCosts = new Dictionary<GraphNode<string>, double>();
             Dictionary<GraphNode<string>, GraphNode<string>> previousNodes = new Dictionary<GraphNode<string>, GraphNode<string>>();
             PriorityQueue<GraphNode<string>, int> minPQ = new PriorityQueue<GraphNode<string>, int>();
-            HashSet<Node<string>> visited = new HashSet<Node<string>>();
+            HashSet<GraphNode<string>> visited = new HashSet<GraphNode<string>>();
 
-            totalCosts.Add(new GraphNode<string>("Start"), 0); //not sure if strings are what is needed here
-            minPQ.Enqueue(new GraphNode<string>("Start"), 0);
+            totalCosts.Add(graph.nodeSet.Find("Start"), 0); //not sure if strings are what is needed here
+            minPQ.Enqueue( graph.nodeSet.Find("Start"), 0);
               
 
             foreach (GraphNode<string> x in graph.Nodes)
@@ -222,22 +222,29 @@ namespace AIAssignment
 
             while (minPQ.Count >= 1)
             {
-                GraphNode<string> newSmallest = minPQ.Dequeue(); 
+                GraphNode<string> newSmallest = minPQ.Dequeue();
+
+                int index = 0;
 
                 foreach (GraphNode<string> connectedNode in newSmallest.ConnectedNodes) //thinks Start has no connected nodes??????????
                 {
                     if (!visited.Contains(connectedNode))
                     {
-                        double altPath = totalCosts.GetValueOrDefault(newSmallest) + totalCosts.GetValueOrDefault(newSmallest) + totalCosts.GetValueOrDefault(connectedNode); //this might not be right
+                        double altPath = totalCosts.GetValueOrDefault(newSmallest) + newSmallest.Costs.ElementAt(index); //this might not be right
                         int altPathInt = Convert.ToInt32(altPath);
                         if (altPath < totalCosts.GetValueOrDefault(connectedNode))
                         {
+                            totalCosts.Remove(connectedNode);
+                            previousNodes.Remove(connectedNode);
                             totalCosts.Add(connectedNode, altPath);
                             previousNodes.Add(connectedNode, newSmallest);
 
+                            
                             minPQ.Enqueue(connectedNode, altPathInt);
                         }
                     }
+                    visited.Add(newSmallest);
+                    index++;
                 }
             }
 
@@ -291,7 +298,47 @@ namespace AIAssignment
             graph.AddUndirectedEdge(F, End, 6);
 
             Dijkstra x = new Dijkstra();
-            Console.WriteLine(x.Results(graph, Start));
+            // Console.WriteLine(x.Results(graph, Start));
+
+            var temp = x.Results(graph, Start);
+
+            Dictionary<GraphNode<string>,double> costs = (Dictionary<GraphNode<string>, double> )temp.ElementAt(0);
+            Dictionary<GraphNode<string>, GraphNode<string>> paths = (Dictionary<GraphNode<string>, GraphNode<string>>)temp.ElementAt(1);
+
+            foreach(var c in costs)
+            {
+                Console.WriteLine("The path from {0} to {1} Costs {2}", Start.Value, c.Key.Value, c.Value);
+                List<string> path = new List<string>();
+
+                GraphNode<string> currentPos = c.Key;
+
+                while(!currentPos.Value.Equals(Start.Value))
+                {
+                    path.Add(currentPos.Value);
+                    currentPos = paths.GetValueOrDefault(currentPos);
+                }
+
+                path.Reverse();
+                bool first = true;
+                foreach(var j in path)
+                {
+
+                    if (!first)
+                    {
+                        Console.Write(" , ");
+                    }
+
+                    Console.Write(" {0} ", j);
+
+                    first = false;
+                }
+
+                Console.WriteLine();
+            }
+
+            
+
+
         }
     }
 }
