@@ -307,17 +307,17 @@ namespace AIAssignment
             Dictionary<GraphNode<string>,double> costs = (Dictionary<GraphNode<string>, double> )temp.ElementAt(0);
             Dictionary<GraphNode<string>, GraphNode<string>> paths = (Dictionary<GraphNode<string>, GraphNode<string>>)temp.ElementAt(1);
 
-            foreach(var c in costs)
+            foreach(var cost in costs)
             {
-                Console.WriteLine("The path from {0} to {1} Costs {2}", Start.Value, c.Key.Value, c.Value);
+                Console.WriteLine("The path from " + Start.Value + " to " + cost.Key.Value + " costs " + cost.Value);
                 List<string> path = new List<string>();
 
-                GraphNode<string> currentPos = c.Key;
+                GraphNode<string> currentPosition = cost.Key;
 
-                while(!currentPos.Value.Equals(Start.Value))
+                while(!currentPosition.Value.Equals(Start.Value))
                 {
-                    path.Add(currentPos.Value);
-                    currentPos = paths.GetValueOrDefault(currentPos);
+                    path.Add(currentPosition.Value);
+                    currentPosition = paths.GetValueOrDefault(currentPosition);
                 }
 
                 path.Reverse();
