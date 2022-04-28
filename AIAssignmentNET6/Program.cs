@@ -6,8 +6,11 @@ using System.Collections.ObjectModel;
 
 namespace AIAssignment
 {
+    //Node<T> class, taken from https://docs.microsoft.com/en-us/previous-versions/ms379572(v=vs.80) 
+    //the Node class provides the base class from which GraphNode can inherit
     public class Node<T>
     {
+        //the Node class makes use of C# generics, any type of data can theoretically be used 
         private T data;
         private NodeList<T> connectedNodes = null;
 
@@ -33,9 +36,11 @@ namespace AIAssignment
 
     }
 
+    //The NodeList class extends the Collection class from the .NET framework, allowing for a custom collection to be implemented
+    //taken from https://docs.microsoft.com/en-us/previous-versions/ms379572(v=vs.80)
     public class NodeList<T> : Collection<GraphNode<T>>
     {
-        public NodeList() : base() { } //not sure if have to invoke the base class to construct
+        public NodeList() : base() { }
 
         public NodeList(int initSize)
         {
