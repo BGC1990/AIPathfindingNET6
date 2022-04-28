@@ -50,6 +50,9 @@ namespace AIAssignment
             }
         }
 
+        //Find method iterates through all items within the selected NodeList.
+        //If the node is found, the GraphNode is returned.
+        //If not, null is returned. 
         public GraphNode<T> Find(T contents)
         {
             foreach (GraphNode<T> node in Items)
@@ -63,6 +66,8 @@ namespace AIAssignment
         }
     }
 
+    //GraphNode class. Inherits from Node class.
+    //taken from https://docs.microsoft.com/en-us/previous-versions/ms379574(v=vs.80)?redirectedfrom=MSDN#datastructures20_5_topic3
     public class GraphNode<T> : Node<T>
     {
         private List<int> costs;
@@ -71,6 +76,7 @@ namespace AIAssignment
         public GraphNode(T value) : base(value) { }
         public GraphNode(T value, NodeList<T> connectedNodes) : base(value, connectedNodes) { }
 
+        //creates a new NodeList of ConnectedNodes if no list exists
         new public NodeList<T> ConnectedNodes
         {
             get
@@ -83,6 +89,7 @@ namespace AIAssignment
             }
         }
 
+       //getter for costs
         public List<int> Costs
         {
             get
@@ -96,6 +103,8 @@ namespace AIAssignment
         }
     }
 
+    //The Graph class, modified from https://docs.microsoft.com/en-us/previous-versions/ms379574(v=vs.80)?redirectedfrom=MSDN#datastructures20_5_topic3
+    //extends the IEnumerable class 
     public class Graph<T> : IEnumerable<T>
     {
         public NodeList<T> nodeSet;
@@ -117,13 +126,15 @@ namespace AIAssignment
         {
             nodeSet.Add(node);
         }
-        //possible to combine these two methods perhaps?
+        
         public void AddNode(T value)
         {
             nodeSet.Add(new GraphNode<T>(value));
         }
 
-        public void AddUndirectedEdge(GraphNode<T> from, GraphNode<T> to, int cost) //tinker with this
+        //method which adds UndirectedEdges to NodeList and the costs to Costs
+        //makes use of the "from" and "to" keywords
+        public void AddUndirectedEdge(GraphNode<T> from, GraphNode<T> to, int cost) 
         {
             from.ConnectedNodes.Add(to);
             from.Costs.Add(cost);
@@ -176,6 +187,7 @@ namespace AIAssignment
             get { return nodeSet.Count; }
         }
 
+        //these methods must be implented by .NET6 in order to compile
         public IEnumerator<T> GetEnumerator()
         {
             throw new NotImplementedException();
@@ -187,33 +199,18 @@ namespace AIAssignment
         }
     }
 
-    /*public class GenericDictionary
-    {
-        private Dictionary<string, double> _dict = new Dictionary<string, double>();
-
-        public void Add<T>(T key, double value) where T : class
-        {
-            _dict.Add(key, value);
-        }
-
-        public T GetValue<T>(string key) where T : class
-        {
-            return _dict[key] as T;
-        }
-    }*/
-
-    
-
+    //the Djikstra class, modified heavily from https://www.youtube.com/watch?v=FSm1zybd0Tk
     public class Dijkstra
     {
         public List<Object> Results(Graph<string> graph, GraphNode<string> node)
         {
             Dictionary<GraphNode<string>, double> totalCosts = new Dictionary<GraphNode<string>, double>();
             Dictionary<GraphNode<string>, GraphNode<string>> previousNodes = new Dictionary<GraphNode<string>, GraphNode<string>>();
+            //.NET6 had to be used due to PriorityQueue not featuring in previous versions
             PriorityQueue<GraphNode<string>, int> minPQ = new PriorityQueue<GraphNode<string>, int>();
             HashSet<GraphNode<string>> visited = new HashSet<GraphNode<string>>();
 
-            totalCosts.Add(graph.nodeSet.Find("Start"), 0); //not sure if strings are what is needed here
+            totalCosts.Add(graph.nodeSet.Find("Start"), 0); 
             minPQ.Enqueue( graph.nodeSet.Find("Start"), 0);
               
 
@@ -221,7 +218,7 @@ namespace AIAssignment
             {
                 if (x.Value != "Start")
                 {
-                    totalCosts.Add(x, double.PositiveInfinity);   //add and put might not be the same thing
+                    totalCosts.Add(x, double.PositiveInfinity);  
                 }
             }
 
