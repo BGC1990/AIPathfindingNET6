@@ -240,8 +240,6 @@ namespace AIAssignment
                             previousNodes.Remove(connectedNode);
                             totalCosts.Add(connectedNode, altPath);
                             previousNodes.Add(connectedNode, newSmallest);
-
-                            
                             minPQ.Enqueue(connectedNode, altPathInt);
                         }
                     }
@@ -318,22 +316,17 @@ namespace AIAssignment
                     path.Add(currentPosition.Value);
                     currentPosition = paths.GetValueOrDefault(currentPosition);
                 }
-
                 path.Reverse();
                 bool first = true;
                 foreach(var node in path)
                 {
-
                     if (!first)
                     {
                         Console.Write(" , ");
                     }
-
                     Console.Write(node);
-
                     first = false;
                 }
-
                 Console.WriteLine();
             }
 
