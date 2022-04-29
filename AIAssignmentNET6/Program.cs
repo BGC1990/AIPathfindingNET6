@@ -228,11 +228,11 @@ namespace AIAssignment
 
                 int index = 0;
 
-                foreach (GraphNode<string> connectedNode in newSmallest.ConnectedNodes) //thinks Start has no connected nodes??????????
+                foreach (GraphNode<string> connectedNode in newSmallest.ConnectedNodes) 
                 {
                     if (!visited.Contains(connectedNode))
                     {
-                        double altPath = totalCosts.GetValueOrDefault(newSmallest) + newSmallest.Costs.ElementAt(index); //this might not be right
+                        double altPath = totalCosts.GetValueOrDefault(newSmallest) + newSmallest.Costs.ElementAt(index); 
                         int altPathInt = Convert.ToInt32(altPath);
                         if (altPath < totalCosts.GetValueOrDefault(connectedNode))
                         {
@@ -300,7 +300,6 @@ namespace AIAssignment
             graph.AddUndirectedEdge(F, End, 6);
 
             Dijkstra x = new Dijkstra();
-            // Console.WriteLine(x.Results(graph, Start));
 
             var temp = x.Results(graph, Start);
 
@@ -322,7 +321,7 @@ namespace AIAssignment
 
                 path.Reverse();
                 bool first = true;
-                foreach(var j in path)
+                foreach(var node in path)
                 {
 
                     if (!first)
@@ -330,7 +329,7 @@ namespace AIAssignment
                         Console.Write(" , ");
                     }
 
-                    Console.Write(" {0} ", j);
+                    Console.Write(" {0} ", node);
 
                     first = false;
                 }
