@@ -329,7 +329,7 @@ namespace AIAssignment
                         Console.Write(" , ");
                     }
 
-                    Console.Write(" {0} ", node);
+                    Console.Write(node);
 
                     first = false;
                 }
